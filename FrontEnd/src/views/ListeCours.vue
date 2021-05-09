@@ -9,14 +9,11 @@
           <th class="th3">Crédits</th>
           <th class="th4">Diplôme</th>
         </tr>
-        <tr
-        v-for="cours in TableauDBcours"
-        :key="cours.id"
-        >
-          <td class="first">{{cours.id}}</td>
-          <td class="second">{{cours.Nom}}</td>
-          <td class="third">{{cours.Credit}}</td>
-          <td class="fourth">{{cours.NomDiplome}}</td>
+        <tr v-for="cours in TableauDBcours" :key="cours.id">
+          <td class="first">{{ cours.id }}</td>
+          <td class="second">{{ cours.Nom }}</td>
+          <td class="third">{{ cours.Credit }}</td>
+          <td class="fourth">{{ cours.NomDiplome }}</td>
         </tr>
       </table>
     </div>
@@ -28,21 +25,21 @@ export default {
   name: "ListeCours",
   data() {
     return {
-        TableauDBcours:[],
+      TableauDBcours: [],
     };
   },
   methods: {
-      getCours() {
-          fetch("http://localhost:3000/join/coursdiplome")
-          .then((res) => res.json())
-          .then((data) => {
-              this.TableauDBcours = data;
-          });
-      }
+    getCours() {
+      fetch("http://localhost:3000/join/coursdiplome")
+        .then((res) => res.json())
+        .then((data) => {
+          this.TableauDBcours = data;
+        });
+    },
   },
-  
+
   created() {
-      this.getCours();
+    this.getCours();
   },
 };
 </script>

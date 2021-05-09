@@ -158,7 +158,6 @@ export default {
 };
 </script>
 <style scoped>
-
 .container {
   max-width: 500px;
   margin: 0px auto;
