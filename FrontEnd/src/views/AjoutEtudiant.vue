@@ -1,23 +1,23 @@
 <template>
   <div class="body">
     <div class="container">
-      <form @submit="ajouterEtudiant" class="add-form">
-        <div class="form-control">
+      <form @submit="ajouterEtudiant" class="btnAjouter">
+        <div class="champs">
           <label>Nom</label>
           <input type="text" name="nom" placeholder="Nom" v-model="nom" />
           <p class="erreur">{{ erreurNom }}</p>
         </div>
-        <div class="form-control">
+        <div class="champs">
           <label>Sexe</label>
-          <select class="liste" name="sexe" v-model="sexe">
+          <select class="ListeDeroul" name="sexe" v-model="sexe">
             <option value="M">Homme</option>
             <option value="F">Femme</option>
           </select>
           <p class="erreur">{{ erreurSexe }}</p>
         </div>
-        <div class="form-control">
-          <label>Diplome</label>
-          <select class="liste" name="diplome" v-model="diplome">
+        <div class="champs">
+          <label>Diplôme</label>
+          <select class="ListeDeroul" name="diplome" v-model="diplome">
             <option
               :key="chaqueDiplome.id"
               v-for="chaqueDiplome in diplomes"
@@ -28,22 +28,22 @@
           </select>
           <p class="erreur">{{ erreurDiplome }}</p>
         </div>
-        <div class="form-control">
-          <label>Telephone</label>
+        <div class="champs">
+          <label>Numéro de téléphone</label>
           <input
             type="text"
             name="telephone"
-            placeholder="Telephone"
+            placeholder="10 chiffres"
             v-model="numTelephone"
           />
           <p class="erreur">{{ erreurTelephone }}</p>
         </div>
-        <div class="form-control">
-          <label>Date de Naissance (Format : dd/mm/yyyy)</label>
+        <div class="champs">
+          <label>Date de Naissance</label>
           <input
             type="text"
             name="date de naissance"
-            placeholder="Birthday"
+            placeholder="dd/mm/yyyy"
             v-model="dateNaissance"
           />
         </div>
@@ -59,6 +59,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import moment from "moment";
 import axios from "axios";
@@ -101,19 +102,21 @@ export default {
       var dateFinale = dateséparé[2] + dateséparé[1] + dateséparé[0];
       var reg = /^\d+$/;
       if (this.nom == "") {
-        return (this.erreurNom = "Veuillez entrer le Nom");
+        return (this.erreurNom = "Veuillez entrer le nom");
       }
       if (this.sexe == "") {
         return (this.erreurSexe = "Veuillez entrer le sexe");
       }
       if (this.diplome == "") {
-        return (this.erreurDiplome = "Choisissez un diplome");
+        return (this.erreurDiplome = "Choisissez un diplôme");
       }
-      if (this.numTelephone.length != 10) {
-        return (this.erreurTelephone = "Il faut 10 numéro");
+      if (this.numTelephone.length != 10 && this.numTelephone.length !== 0) {
+        return (this.erreurTelephone = "Le numéro doit être composé de 10 chiffres");
       }
-      if (reg.test(this.numTelephone) == false) {
-        return (this.erreurTelephone = "Que des numéros svp");
+      if (this.numTelephone) {
+        if (reg.test(this.numTelephone) == false) {
+          return (this.erreurTelephone = "Que des numéros svp");
+        }
       }
       var étudiant = {
         Nom: this.nom,
@@ -157,14 +160,19 @@ export default {
   },
 };
 </script>
+
 <style scoped>
+
+/* La page du site */
 .container {
-  max-width: 500px;
+  max-width: 450px;
   margin: 0px auto;
   min-height: 300px;
   padding: 30px;
   border-radius: 5px;
 }
+
+/* Les boutons */
 .btn {
   display: inline-block;
   color: #fff;
@@ -188,36 +196,38 @@ export default {
   width: 100%;
 }
 
-.add-form {
+.btnAjouter {
   margin-bottom: 40px;
 }
-.form-control {
+
+/* Les champs formulaire */
+.champs {
   margin: 20px 0;
 }
-.form-control label {
+.champs label {
   display: block;
 }
-.form-control input,
-.liste {
+.champs input,
+.ListeDeroul {
   width: 100%;
   height: 30px;
   margin: 5px;
   padding: 3px 7px;
   font-size: 17px;
 }
-.form-control-check {
+.champs-check {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.form-control-check label {
+.champs-check label {
   flex: 1;
 }
-.form-control-check input {
+.champs-check input {
   flex: 2;
   height: 20px;
 }
-.liste {
+.ListeDeroul {
   width: 104% !important;
 }
 
@@ -227,19 +237,15 @@ export default {
   margin-left: 2rem;
 }
 
-.first {
+.first, .second {
   background: #000;
 }
 
-.second {
-  background: #000;
-}
-
+/* Messages de réussite/ erreur */
 .ajout {
   display: flex;
   justify-content: center;
 }
-
 .erreur {
   color: red;
   margin-left: 10px;

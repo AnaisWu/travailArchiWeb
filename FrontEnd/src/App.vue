@@ -24,4 +24,10 @@ html {
 .element {
   padding-top: 100px;
 }
+
+@media (max-width: 650px) {
+  html {
+    font-size: small;
+  }
+}
 </style>

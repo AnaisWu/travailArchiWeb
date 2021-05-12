@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <header class="search">
       <input
         class="input"
@@ -48,9 +48,11 @@
         </option>
       </select>
     </div>
-    <router-link class="link" to="/etudiant/ajout"
-      ><button class="BoutonAjouter">Ajouter</button></router-link
-    >
+    <router-link class="link" to="/etudiant/ajout">
+      <div class="bouton">
+        <button class="BoutonAjouter">Ajouter</button>
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -128,35 +130,59 @@ export default {
   --main-color-darker: rgba(245, 245, 245, 0.3);
 }
 
+/* Blocs grid */
+.page {
+  display: grid;
+  width: 100%;
+  grid-template-areas: 
+            "head head"
+            "tbl filtre"
+            "tbl bouton";
+  justify-content: center;
+  margin-bottom: 10%;
+}
+.page > header {
+  grid-area: head;
+}
+.page > .table {
+  grid-area: tbl;
+}
+.page > .FiltreDiplome {
+  grid-area: filtre;
+  position: fixed;
+}
+.page > .link {
+  grid-area: bouton;
+}
+
 .search {
   display: flex;
   justify-content: center;
-  padding: 20px 0px;
+  padding: 50px 0px 100px 0px;
   background: whitesmoke;
   position: fixed;
   width: 100%;
-  margin-top: -56px;
+  margin-top: -55px;
 }
-
 .input {
   width: 80%;
   height: 30px;
 }
 
+/* Tableau */
 .table {
-  padding-top: 100px;
-}
-
+  padding-top: 150px;
+} 
 table {
-  margin-left: 1rem;
   padding-top: 5vh;
   width: 80vw;
   border-collapse: collapse;
 }
-th,
-td {
+/* Toutes les cases du tableau */
+th, td {
   border: 1px solid black;
 }
+/* Les champs du tableau */
 th {
   margin-left: 1rem;
   text-align: center;
@@ -171,7 +197,7 @@ td {
 tr:nth-child(even) {
   background: #dddddd;
 }
-
+/* Taille des colonnes */
 .th1,
 .first {
   width: 15%;
@@ -188,47 +214,52 @@ tr:nth-child(even) {
 .sixth {
   text-align: center;
   cursor: pointer;
-  width: 50px;
+  width: auto;
   padding: 10px 0px;
   margin: 0px 10px;
 }
 
+/* Filtre */
 .FiltreDiplome {
+  background: whitesmoke;
   position: absolute;
-  top: 20%;
-  right: 80px;
+  top: 25%;
+  right: 10%;
 }
 
+/* Bouton Ajouter */
 .link {
   color: black;
 }
 .BoutonAjouter {
   font-style: none;
-  cursor: pointer;
-  margin-top: 50px;
-  margin-bottom: 10px;
-  margin-right: 8%;
-  float: right;
+  cursor: pointer; 
   padding: 8px 20px;
   font-weight: bold;
   border-radius: 5px;
   border: 2px solid gray;
 }
 
+/* Icones détails & suppression */
 .details,
 .fas {
   padding: 5px 10px;
 }
-
 .fas:hover {
   color: red;
 }
-
 .details:hover {
   color: blue;
 }
 
-.test {
-  position: relative;
+@media (max-width: 650px) {
+  .BoutonAjouter {
+    max-width: 50px;
+    padding: 3px 5px;
+    font-size: smaller;
+  }
+  .th3, .third {
+    width: 25%;
+  }
 }
 </style>

@@ -42,15 +42,17 @@ export default {
 </script>
 <style scoped>
 table {
-  margin-left: 1rem;
-  padding-top: 5vh;
-  width: 80vw;
+  width: 80%;
   border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
 }
+/* Toutes les cases du tableau */
 th,
 td {
   border: 1px solid black;
 }
+/* Les champs du tableau */
 th {
   margin-left: 1rem;
   text-align: center;
@@ -60,7 +62,7 @@ td {
   text-align: left;
   padding-left: 10px;
   border-bottom: 1px solid grey;
-  height: 25px;
+  height: 40px;
 }
 tr:nth-child(even) {
   background: #dddddd;
@@ -72,22 +74,7 @@ tr:nth-child(even) {
 }
 .th3,
 .third {
-  width: 30%;
+  width: 20%;
 }
-.th4,
-.fourth {
-  width: 15%;
-}
-/* .head {
-  position: fixed;
-  top: 180px;
-} */
-.fifth,
-.sixth {
-  text-align: center;
-  cursor: pointer;
-  width: 50px;
-  padding: 10px 0px;
-  margin: 0px 10px;
-}
+
 </style>

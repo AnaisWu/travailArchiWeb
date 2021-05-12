@@ -2,7 +2,7 @@
   <nav>
     <router-link class="link" to="/">Etudiant</router-link>
     <router-link class="link" to="/cours">Cours</router-link>
-    <router-link class="link" to="/diplome">Diplome</router-link>
+    <router-link class="link" to="/diplome">Diplôme</router-link>
   </nav>
 </template>
 
@@ -36,6 +36,4 @@ nav {
   color: white;
 }
 
-@media (max-width: 800px) {
-}
 </style>

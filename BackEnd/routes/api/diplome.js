@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
     if (req.body.NomDiplome == null) {
         return res.status(400).send("Veuillez introduire le diplôme")
     }
-    if (req.body.NomDiplome.length > 20) {
+    if (req.body.NomDiplome.length > 50) {
         return res.status(400).send('Le nom introduit est trop long')
     }
     if (req.body.TotalCredit == null) {

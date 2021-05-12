@@ -1,8 +1,8 @@
 <template>
   <div class="body">
     <div class="container">
-      <form @submit="editerEtudiant" class="add-form">
-        <div class="form-control">
+      <form @submit="editerEtudiant" class="btnAjouter">
+        <div class="champs">
           <label>Matricule</label>
           <input
             class="desactive"
@@ -13,22 +13,22 @@
             disabled="true"
           />
         </div>
-        <div class="form-control">
+        <div class="champs">
           <label>Nom</label>
           <input type="text" v-model="nom" name="nom" placeholder="Nom" />
           <p class="erreur">{{ erreurNom }}</p>
         </div>
-        <div class="form-control">
+        <div class="champs">
           <label>Sexe</label>
-          <select class="liste" name="sexe" v-model="sexe">
+          <select class="ListeDeroul" name="sexe" v-model="sexe">
             <option value="M">Homme</option>
             <option value="F">Femme</option>
           </select>
         </div>
-        <div class="form-control">
+        <div class="champs">
           <label>Diplome</label>
           <select
-            class="liste"
+            class="ListeDeroul"
             v-model="diplome.id"
             name="diplome"
             placeholder="Diplome"
@@ -42,7 +42,7 @@
             </option>
           </select>
         </div>
-        <div class="form-control">
+        <div class="champs">
           <label>Telephone</label>
           <input
             type="text"
@@ -52,7 +52,7 @@
           />
           <p class="erreur">{{ erreurTelephone }}</p>
         </div>
-        <div class="form-control">
+        <div class="champs">
           <label>Date de Naissance (Format : dd/mm/yyyy)</label>
           <input
             type="text"
@@ -158,14 +158,19 @@ export default {
   },
 };
 </script>
+
 <style scoped>
+
+/* La page du site */
 .container {
-  max-width: 500px;
+  max-width: 450px;
   margin: 0px auto;
   min-height: 300px;
   padding: 30px;
   border-radius: 5px;
 }
+
+/* Les boutons */
 .btn {
   display: inline-block;
   color: #fff;
@@ -189,36 +194,38 @@ export default {
   width: 100%;
 }
 
-.add-form {
+.btnAjouter {
   margin-bottom: 40px;
 }
-.form-control {
+
+/* Les champs formulaire */
+.champs {
   margin: 20px 0;
 }
-.form-control label {
+.champs label {
   display: block;
 }
-.form-control input,
-.liste {
+.champs input,
+.ListeDeroul {
   width: 100%;
   height: 30px;
   margin: 5px;
   padding: 3px 7px;
   font-size: 17px;
 }
-.form-control-check {
+.champs-check {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.form-control-check label {
+.champs-check label {
   flex: 1;
 }
-.form-control-check input {
+.champs-check input {
   flex: 2;
   height: 20px;
 }
-.liste {
+.ListeDeroul {
   width: 104% !important;
 }
 
@@ -228,14 +235,15 @@ export default {
   margin-left: 2rem;
 }
 
-.first {
+.first, .second {
   background: #000;
 }
 
-.second {
-  background: #000;
+/* Messages de réussite/ erreur */
+.ajout {
+  display: flex;
+  justify-content: center;
 }
-
 .erreur {
   color: red;
   margin-left: 10px;
