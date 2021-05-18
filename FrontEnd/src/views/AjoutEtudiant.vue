@@ -61,18 +61,22 @@
 </template>
 
 <script>
-import moment from "moment";
 import axios from "axios";
 export default {
   name: "FormulaireEtudiant",
   data() {
     return {
+      //Objet étudiant
       nom: "",
       sexe: "",
       dateNaissance: "",
       numTelephone: "",
       diplome: "",
+
+
       diplomes: [],
+
+
       réussi: "",
 
       //erreur
@@ -84,23 +88,23 @@ export default {
     };
   },
   methods: {
-    goBack(e) {
+    goBack() {
+      // bouton annuler pour repasser sur la page /
       this.$router.push("/");
     },
     getDiplome() {
       fetch("http://localhost:3000/diplome")
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           this.diplomes = data;
         });
     },
     ajouterEtudiant(e) {
-      e.preventDefault();
+      e.preventDefault(); // supprimer 'ajout?nom=&telephone=&date+de+naissance=' dans le lien lorsque ajout
 
-      var dateséparé = this.dateNaissance.split("/");
-      var dateFinale = dateséparé[2] + dateséparé[1] + dateséparé[0];
-      var reg = /^\d+$/;
+      var dateséparé = this.dateNaissance.split("/"); //séparer pour obtenir un tableau
+      var dateFinale = dateséparé[2] + dateséparé[1] + dateséparé[0]; // transformer date pour SQL sous format yyyymmdd
+      var reg = /^\d+$/; //input que des numéro -> check condition true/ false ligne 122
       if (this.nom == "") {
         return (this.erreurNom = "Veuillez entrer le nom");
       }
@@ -111,7 +115,8 @@ export default {
         return (this.erreurDiplome = "Choisissez un diplôme");
       }
       if (this.numTelephone.length != 10 && this.numTelephone.length !== 0) {
-        return (this.erreurTelephone = "Le numéro doit être composé de 10 chiffres");
+        return (this.erreurTelephone =
+          "Le numéro doit être composé de 10 chiffres");
       }
       if (this.numTelephone) {
         if (reg.test(this.numTelephone) == false) {
@@ -119,7 +124,7 @@ export default {
         }
       }
       var étudiant = {
-        Nom: this.nom,
+        Nom: this.nom, // v-model dans html
         Sexe: this.sexe,
         Diplome: this.diplome,
         dateNaissance: dateFinale,
@@ -143,9 +148,10 @@ export default {
 
           setTimeout(() => {
             this.réussi = "";
-          }, 2000);
+          }, 2000); // disparaitre après 2 sec
         })
         .catch((err) => {
+          //rejetée sur base de la condition 'date' et toutes autres erreurs ds SQL
           if (err) {
             if (err.response.data.sqlMessage.includes("Incorrect date value")) {
               this.erreurDateNaissance =
@@ -162,7 +168,6 @@ export default {
 </script>
 
 <style scoped>
-
 /* La page du site */
 .container {
   max-width: 450px;
@@ -185,9 +190,11 @@ export default {
   font-size: 15px;
   font-family: inherit;
 }
+/* rslt après clique -> bordure plus gras -> none */
 .btn:focus {
   outline: none;
 }
+/* active = au clique, scale = échelle 1 à 0.98 */
 .btn:active {
   transform: scale(0.98);
 }
@@ -215,18 +222,7 @@ export default {
   padding: 3px 7px;
   font-size: 17px;
 }
-.champs-check {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.champs-check label {
-  flex: 1;
-}
-.champs-check input {
-  flex: 2;
-  height: 20px;
-}
+
 .ListeDeroul {
   width: 104% !important;
 }
@@ -237,7 +233,8 @@ export default {
   margin-left: 2rem;
 }
 
-.first, .second {
+.first,
+.second {
   background: #000;
 }
 

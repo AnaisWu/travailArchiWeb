@@ -12,4 +12,4 @@ app.use('/diplome', require('./routes/api/diplome'));
 app.use('/etudiants', require('./routes/api/etudiants'));
 app.use('/cours', require('./routes/api/cours'));
 app.use('/join', require('./routes/api/join'));
-app.listen(3000, () => console.log("server started"));
+app.listen(3000, () => console.log("server started")); //lancer le serveur

@@ -1,6 +1,7 @@
 <template>
   <div class="body">
     <div class="container">
+      <!-- @submit = à l'envoie -->
       <form @submit="editerEtudiant" class="btnAjouter">
         <div class="champs">
           <label>Matricule</label>
@@ -12,6 +13,7 @@
             placeholder="Matricule"
             disabled="true"
           />
+          <!-- disabled = non-modifiable -->
         </div>
         <div class="champs">
           <label>Nom</label>
@@ -83,6 +85,8 @@ export default {
       diplome: {},
       telephone: "",
       naissance: "",
+
+
       diplomes: [],
 
       //erreur
@@ -111,7 +115,7 @@ export default {
           this.telephone = data[0].NumTelephone;
           this.naissance = moment(data[0].dateNaissance).format("DD/MM/yyyy");
           this.sexe = data[0].Sexe;
-          fetch("http://localhost:3000/diplome/" + data[0].Diplome)
+          fetch("http://localhost:3000/diplome/" + data[0].Diplome) //recherche id diplome ds tableau diplome
             .then((res) => res.json())
             .then((data) => {
               this.diplome = data[0];
@@ -213,18 +217,7 @@ export default {
   padding: 3px 7px;
   font-size: 17px;
 }
-.champs-check {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.champs-check label {
-  flex: 1;
-}
-.champs-check input {
-  flex: 2;
-  height: 20px;
-}
+
 .ListeDeroul {
   width: 104% !important;
 }

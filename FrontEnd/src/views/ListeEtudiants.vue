@@ -69,13 +69,13 @@ export default {
   },
   methods: {
     etudiantDetailles(etudiant) {
-      this.$router.push(`/etudiant/${etudiant.MatriculeEtudiant}`);
+      this.$router.push(`/etudiant/${etudiant.MatriculeEtudiant}`); //push 'etudiant/matricul' ds le lien pour accèder à un étudiant spécifique
     },
     getEtudiant() {
       fetch("http://localhost:3000/join")
-        .then((res) => res.json())
+        .then((res) => res.json()) //mettre en format json pour être lisible
         .then((data) => {
-          this.TableauDBétudiants = data;
+          this.TableauDBétudiants = data; //attribuer les données dans les 2 variables
           this.TableauEtudiants = data;
         });
     },
@@ -90,11 +90,11 @@ export default {
       if (confirm("Voulez-vous supprimer l'élève")) {
         axios
           .delete(
-            "http://localhost:3000/etudiants/" + etudiant.MatriculeEtudiant
+            "http://localhost:3000/etudiants/" + etudiant.MatriculeEtudiant // suppression dans la DB
           )
           .then(
             (res) =>
-              (this.TableauEtudiants = this.TableauEtudiants.filter(
+              (this.TableauEtudiants = this.TableauEtudiants.filter( // suppression dans le frontend
                 (donnéeTableau) =>
                   donnéeTableau.MatriculeEtudiant !== etudiant.MatriculeEtudiant
               ))
@@ -111,13 +111,13 @@ export default {
         );
       }
     },
-    BarreRecherche(input) {
+    BarreRecherche(event) {
       this.TableauEtudiants = this.TableauDBétudiants.filter((etudiant) =>
-        etudiant.Nom.toLowerCase().includes(input.target.value.toLowerCase())
+        etudiant.Nom.toLowerCase().includes(event.target.value.toLowerCase()) // toLowerCase = tous en miniscule
       );
     },
   },
-  created() {
+  created() { //Executer les fonctions lorsque la page est chargée
     this.getEtudiant();
     this.getDiplome();
   },

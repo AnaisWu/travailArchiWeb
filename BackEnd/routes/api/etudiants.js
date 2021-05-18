@@ -102,7 +102,7 @@ router.put('/:MatriculeEtudiant', (req, res) => {
         if (errors) {
             return res.status(400).send(errors)
         }
-        res.send("Modification réussie") // PRQ PAS res.send(req.body.Sexe) ???
+        res.send("Modification réussie")
     });
 });
 
